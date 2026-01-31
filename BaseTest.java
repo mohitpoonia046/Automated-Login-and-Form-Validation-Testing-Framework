@@ -1,22 +1,25 @@
-# Automated Login and Form Validation using Selenium
+package base;
 
-## Tech Stack
-- Selenium WebDriver
-- Java
-- TestNG
-- Maven
-- XPath & CSS Selectors
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
-## Features
-- Automated Login Testing
-- Form Validation Testing
-- Logout Testing
-- Positive & Negative Scenarios
+public class BaseTest {
 
-## How to Run
-1. Clone the repository
-2. Import as Maven project
-3. Run `testng.xml`
+    protected WebDriver driver;
 
-## Author
-Mohit Poonia
+    @BeforeMethod
+    public void setup() {
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://example.com/login");
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        driver.quit();
+    }
+}
